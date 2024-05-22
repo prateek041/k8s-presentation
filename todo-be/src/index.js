@@ -1,8 +1,10 @@
 const express = require("express")
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 const PORT = 8080
 const mongoUri = 'mongodb://root:example@localhost:27017/';
 
@@ -31,7 +33,7 @@ app.get("/todos/get", async (req, res) => {
   try {
     const todos = await Todo.find()
     console.log(todos)
-    res.status(200).json({ todos: "hello this is your todos" })
+    res.status(200).json({ todos: todos })
     return
   } catch (error) {
     console.error(error)
